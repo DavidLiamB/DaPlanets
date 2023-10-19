@@ -2,12 +2,12 @@ import { dbContext } from "../db/DbContext.js";
 
 class SolarSystemsService {
   async getSolarSystems() {
-    const solarSystems = await dbContext.SolarSystems.find()
-    solarSystems.forEach(async (solarSystem) => { await solarSystem.populate('galaxy') })
+    const solarSystems = await dbContext.SolarSystems.find().populate('galaxy')
     return solarSystems
   }
   async createSolarSystem(newSolarSystem) {
     const solarSystem = await dbContext.SolarSystems.create(newSolarSystem)
+    await solarSystem.populate('galaxy')
     return solarSystem
   }
 

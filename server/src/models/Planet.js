@@ -7,3 +7,10 @@ export const PlanetSchema = new Schema({
   liveable: { type: Boolean, required: true, default: false },
   solarSystemId: { type: Schema.Types.ObjectId, required: true, ref: 'solarSystem' }
 }, { timestamps: true, toJSON: { virtuals: true } })
+
+PlanetSchema.virtual('solarSystem', {
+  localField: 'solarSystemId',
+  ref: 'solarSystem',
+  foreignField: '_id',
+  justOne: true
+})
